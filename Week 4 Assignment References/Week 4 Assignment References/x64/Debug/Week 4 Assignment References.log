@@ -1,0 +1,3 @@
+﻿  Source.cpp
+C:\Users\David\source\repos\CSC215\Week 4\Week 4 Assignment References\Week 4 Assignment References\Source.cpp(78): warning C4172: returning address of local variable or temporary: choice
+  Week 4 Assignment References.vcxproj -> C:\Users\David\source\repos\CSC215\Week 4\Week 4 Assignment References\x64\Debug\Week 4 Assignment References.exe
