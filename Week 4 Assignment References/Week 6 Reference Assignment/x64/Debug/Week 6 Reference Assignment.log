@@ -1,4 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Week 6 Reference Assignment.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Source.cpp
-C:\Users\David\source\repos\CSC215\Week 4\Chapter 6\Week 4 Assignment References\Week 6 Reference Assignment\Source.cpp(78): warning C4172: returning address of local variable or temporary: choice
-  Week 6 Reference Assignment.vcxproj -> C:\Users\David\source\repos\CSC215\Week 4\Chapter 6\Week 4 Assignment References\x64\Debug\Week 4 Assignment References.exe
