@@ -1,0 +1,7 @@
+﻿  Source.cpp
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(115,3): error C2361: initialization of 'die2' is skipped by 'default' label
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(99): message : see declaration of 'die2'
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(115,3): error C2361: initialization of 'die1' is skipped by 'default' label
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(98): message : see declaration of 'die1'
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(115,3): error C2361: initialization of 'randomNumber' is skipped by 'default' label
+C:\Users\David\source\repos\CSC215\Chapter 1\Week 1 Assignment\Week 1 Assignment\Source.cpp(97): message : see declaration of 'randomNumber'
