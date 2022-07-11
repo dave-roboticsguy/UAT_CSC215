@@ -11,6 +11,9 @@
 // This way saves time but gives you access to all elements
 using namespace std; // This using directive gives direct access to the elements of the std namespace
 
+// prototypes are a declaration of a function
+// C++ does not require prototypes, but can be good practice for:
+// Better organization, prevents errors from reorganization, allows for default arguments that are always used
 void lifeSupportSystemStatus();
 int oxygenSupplyStatus();
 int nitrogenSupplyStatus();
