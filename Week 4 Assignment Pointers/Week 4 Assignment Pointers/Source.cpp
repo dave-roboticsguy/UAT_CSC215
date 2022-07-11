@@ -93,7 +93,7 @@ void lifeSupportSystemStatus()
 			int n2 = nitrogenSupplyStatus(); // Created int n2 and assigned it return value of nitrogenSupplyStatus()
 			int* n2_ptr = &n2; // Created n2 pointer and assigned it to memory address of n2
 
-			if ((*n2_ptr) != 78) // If the N2 pointer is not equal to 22 then perform auto correction
+			if ((*n2_ptr) != 78) // If the N2 pointer is not equal to 78 then perform auto correction
 			{
 				cout << "\nWarning the N2 level is " << *n2_ptr << "%, which isn't nominal."
 					<< "\n\nPerforming Auto correction sequence...";
@@ -127,7 +127,7 @@ int nitrogenSupplyStatus()
 {
 	random_device randomNumber; // C++11 non-deterministic random number generator using hardware entropy source
 	mt19937 gen(randomNumber()); // 32-bit Mersenne Twister algorithim by Matsumoto and Nishimura, 1998
-	uniform_int_distribution<> dis(73, 83); // Produces integer values evenly distributed across a range of 1 - 6
+	uniform_int_distribution<> dis(73, 83); // Produces integer values evenly distributed across a range of 73 - 83
 	// Nominal nitrogen is 78%
 	return dis(gen);
 }
