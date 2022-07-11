@@ -25,7 +25,6 @@ int main() // function called main
 
 	// SetConsoleTextAttribute changes the attribute for new characters that you write to the console, but doesn't affect existing contents of the console
 	// GetStdHandle function provides a mechanism for retrieving the standard input (STDIN), standard output (STDOUT), and standard error (STDERR) handles associated with a process.
-
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 
 	while (success = true) //while loop that will cycle through if the bool success is true from correct user input
@@ -94,7 +93,7 @@ void lifeSupportSystemStatus()
 			int n2 = nitrogenSupplyStatus(); // Created int n2 and assigned it return value of nitrogenSupplyStatus()
 			int* n2_ptr = &n2; // Created n2 pointer and assigned it to memory address of n2
 
-			if ((*n2_ptr) != 78) // If the o2 pointer is not equal to 22 then perform auto correction
+			if ((*n2_ptr) != 78) // If the N2 pointer is not equal to 22 then perform auto correction
 			{
 				cout << "\nWarning the N2 level is " << *n2_ptr << "%, which isn't nominal."
 					<< "\n\nPerforming Auto correction sequence...";
@@ -131,18 +130,16 @@ int nitrogenSupplyStatus()
 	uniform_int_distribution<> dis(73, 83); // Produces integer values evenly distributed across a range of 1 - 6
 	// Nominal nitrogen is 78%
 	return dis(gen);
-
 }
 
 void auto_o2Fix(int* o2_ptr) // function is used to change the O2 pointer value
 {
 	*o2_ptr = 22;
-	cout << "\nThe Oxygen level has been adjust to " << *o2_ptr << "%, which is nominal." << endl;
-
+	cout << "\nThe Oxygen level has been adjusted to " << *o2_ptr << "%, which is nominal." << endl;
 }
 
 void auto_n2Fix(int* n2_ptr) // function is used to change the N2 pointer value
 {
 	*n2_ptr = 78;
-	cout << "\nThe N2 level has been adjust to " << *n2_ptr << "%, which is nominal." << endl;
+	cout << "\nThe N2 level has been adjusted to " << *n2_ptr << "%, which is nominal." << endl;
 }
