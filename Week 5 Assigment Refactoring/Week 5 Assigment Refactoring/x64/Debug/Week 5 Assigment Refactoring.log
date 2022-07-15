@@ -1,0 +1,5 @@
+﻿  adventure.cpp
+C:\Users\David\source\repos\CSC215\Week 5\Week 5 Assigment Refactoring\Week 5 Assigment Refactoring\adventure.cpp(182,7): warning C4101: 'adventureChoice': unreferenced local variable
+  adventure_main.cpp
+  Generating Code...
+  Week 5 Assigment Refactoring.vcxproj -> C:\Users\David\source\repos\CSC215\Week 5\Week 5 Assigment Refactoring\x64\Debug\Week 5 Assigment Refactoring.exe
