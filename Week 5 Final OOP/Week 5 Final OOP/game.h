@@ -15,7 +15,7 @@ class Hero
 public:
 	int m_HealthPoints = 1000;
 	int m_Experience = 0;
-	int m_Currency = 0;
+	int m_Silver = 0;
 	int m_Level = 0;
 	int m_Attack = 50;
 
@@ -27,6 +27,10 @@ public:
 
 	void SetLevelUp();
 	int GetLevelUp();
+
+	void Stats();
+	void Death();
+	void Reborn();
 
 private:
 };
@@ -49,4 +53,5 @@ class Battles
 {
 public:
 	void TrollBattle();
+	void EpicTrollArmyBattle();
 };

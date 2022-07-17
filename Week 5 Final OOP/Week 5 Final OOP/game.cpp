@@ -6,8 +6,9 @@
 
 using namespace std;
 
-Enemy Troll_1;
 Hero Hero_1;
+Enemy Troll_1;
+Enemy TrollArmy;
 Battles TrollBattle_1;
 
 bool Utility::Login()
@@ -43,9 +44,11 @@ void Utility::GameMenu()
 {
 	cout << "\nGame Menu\n"
 		<< "\n1: Troll Battle"
-		<< "\n2: Check Stats"
-		<< "\n3: Market"
-		<< "\n4: Quit\n";
+		<< "\n2: Epic Troll Army Battle"
+		<< "\n3: Check Stats"
+		<< "\n4: Market"
+		<< "\n5: Reborn"
+		<< "\n6: Quit\n";
 	cout << "\nChoose number" << endl;
 
 	cin >> choice;
@@ -66,24 +69,60 @@ void Utility::GameMenu()
 		{
 			cout << "\nYou turn your back to the troll and run away."
 				<< "\nBut you slip on a rock and the troll stabs you in your neck."
-				<< "\nYou die a coward's death.\n";
+				<< "\nYou die a coward's death and lose everything.\n";
+			Hero_1.Death();
 		}
-
+		else
+		{
+			cout << "Invalid Choice." << endl;
+		}
+		break;
 	}
 	case 2:
 	{
+		cout << "\nYou find an army of 100 blood thirsty trolls. Do you fight?"
+			<< "\n1: Yes"
+			<< "\n2: No\n";
 
-
+		cin >> fight;
+		if (fight == 1)
+		{
+			TrollBattle_1.EpicTrollArmyBattle();
+		}
+		else if (fight == 2)
+		{
+			cout << "\nYou run away in fear for your life."
+				<< "\nA troll scout spots you and throws his spear chest."
+				<< "\nYou fall on the ground and bleed out slowly.\n";
+			Hero_1.Death();
+		}
+		else
+		{
+			cout << "Invalid Choice." << endl;
+		}
+		break;
 	}
 	case 3:
 	{
-
+		Hero_1.Stats();
+		break;
 	}
 	case 4:
 	{
 		break;
 	}
+	case 5:
+	{
+		Hero_1.Reborn();
+		break;
+	}
+	case 6:
+	{
+		// Quitting the game
+		exit(EXIT_FAILURE); // Also, exit(0) means EXIT_SUCCESS
+	}
 	default:
+		cout << "Invalid Choice." << endl;
 		break;
 	}
 
@@ -115,12 +154,39 @@ void Hero::SetLevelUp()
 	{
 		Hero_1.m_Level++;
 		Hero_1.m_Experience = 0;
+		Hero_1.m_HealthPoints = Hero_1.m_HealthPoints + 100;
 	}
 }
 
 int Hero::GetLevelUp()
 {
 	return Hero_1.m_Level;
+}
+
+void Hero::Stats()
+{
+	cout << "Your are level " << Hero_1.GetLevelUp() << endl;
+	cout << "Your Health Points are " << Hero_1.GetHealthPoints() << endl;
+	cout << "You have " << Hero_1.m_Silver << " Silver." << endl;
+	cout << "You have " << Hero_1.GetExperience() << " Experience." << endl;
+}
+
+void Hero::Death()
+{
+	Hero_1.m_HealthPoints = 0;
+	Hero_1.m_Experience = 0;
+	Hero_1.m_Silver = 0;
+	Hero_1.m_Level = 0;
+}
+
+void Hero::Reborn()
+{
+	Hero_1.m_HealthPoints = 1000;
+	Hero_1.m_Experience = 0;
+	Hero_1.m_Silver = 0;
+	Hero_1.m_Level = 1;
+
+	cout << "You have been reborn." << endl;
 }
 
 void Enemy::SetHealthPoints(int* hp_ptr)
@@ -146,6 +212,40 @@ void Battles::TrollBattle()
 	if (Hero_1.m_HealthPoints > 0)
 	{
 		cout << "You Decimate the Troll with your whirlwind attack and chop it's head off." << endl;
+
+		Hero_1.SetExperience(Hero_1.m_Experience);
+		Hero_1.SetLevelUp();
+
+		Hero_1.m_Silver = Hero_1.m_Silver + Troll_1.m_SilverDrop;
+
+		cout << "You have " << Hero_1.GetHealthPoints() << " Health Points." << endl;
+		cout << "Your XP is " << Hero_1.GetExperience() << endl;
+		cout << "Your level is " << Hero_1.GetLevelUp() << endl;
+		cout << "Your silver is " << Hero_1.m_Silver << endl;
+	}
+	else
+	{
+		cout << "You suck at adventure games...You let a weak level 1 troll beat you?" << endl;
+		Hero_1.Death();
+	}
+
+}
+
+void Battles::EpicTrollArmyBattle()
+{
+	TrollArmy.m_HealthPoints = 10000;
+	TrollArmy.m_Attack = 500;
+	int* TrollHP_ptr = &TrollArmy.m_HealthPoints;
+	do
+	{
+		Hero_1.SetHealthPoints(Hero_1.m_HealthPoints);
+		TrollArmy.SetHealthPoints(TrollHP_ptr);
+
+	} while (Hero_1.m_HealthPoints > 0 && TrollArmy.m_HealthPoints > 0);
+
+	if (Hero_1.m_HealthPoints > 0)
+	{
+		cout << "You go into Berserker Mode and hack and slash all 100 Trolls." << endl;
 		Hero_1.SetExperience(Hero_1.m_Experience);
 		Hero_1.SetLevelUp();
 		cout << "You have " << Hero_1.GetHealthPoints() << " Health Points." << endl;
@@ -156,6 +256,8 @@ void Battles::TrollBattle()
 	else
 	{
 		cout << "You suck at adventure games...You let a weak level 1 troll beat you?" << endl;
+		Hero_1.Death();
 	}
-
 }
+
+
