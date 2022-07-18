@@ -15,7 +15,9 @@ using namespace std;
 int main()
 {
 	Utility rpg; // Instance of Class Utility
+
 	rpg.Login(); // Accessing Login method from Utility Class
+	rpg.Welcome();
 
 	while (true) // Main Game Loop
 	{

@@ -30,7 +30,7 @@ bool Utility::Login()
 	do {
 		cout << "Please login.\n"
 			<< "Username: ";
-		// // A standard library function that is used to read a string or a line from an input stream.
+		// A standard library function that is used to read a string or a line from an input stream.
 		getline(cin, username); // Takes userinput and assigns it to "username"
 		if (username == "Dave") // username must equal "Dave"
 		{
@@ -48,6 +48,19 @@ bool Utility::Login()
 	} while (password != "Pass");
 	return flag = true; // If login is successful, return flag true
 }
+
+// Accepts user input for Hero Name and then greets you
+void Utility::Welcome()
+{
+	string HeroName;
+	cout << "\n\tWelcome to my C++ adventure!\n" // new line and tab
+		<< "Choose your Hero name.\n";
+	getline(cin, HeroName);
+	cout << "\n"
+		<< HeroName
+		<< ", your epic adventure now begins!" << endl;
+}
+
 
 void Utility::GameMenu()
 {
@@ -85,6 +98,8 @@ void Utility::GameMenu()
 		else
 		{
 			cout << "Invalid Choice." << endl;
+			cin.clear(); // clears input state and error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skips to the next new line
 		}
 		break;
 	}
@@ -109,6 +124,8 @@ void Utility::GameMenu()
 		else
 		{
 			cout << "Invalid Choice." << endl;
+			cin.clear(); // clears input state and error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skips to the next new line
 		}
 		break;
 	}

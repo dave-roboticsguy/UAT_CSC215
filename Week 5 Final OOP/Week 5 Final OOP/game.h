@@ -10,6 +10,7 @@ public:
 	// Public Class Member Functions or Methods
 	bool Login();
 	void GameMenu();
+	void Welcome();
 
 private:
 	// Private Class Data Members
