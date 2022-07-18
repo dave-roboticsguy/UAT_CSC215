@@ -14,10 +14,10 @@ using namespace std;
 
 int main()
 {
-	Utility rpg;
-	rpg.Login();
+	Utility rpg; // Instance of Class Utility
+	rpg.Login(); // Accessing Login method from Utility Class
 
-	while (true)
+	while (true) // Main Game Loop
 	{
 		rpg.GameMenu();
 	}

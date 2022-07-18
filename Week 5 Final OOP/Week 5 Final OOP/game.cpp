@@ -5,14 +5,17 @@
 #include <stdlib.h> // Used for exit() function to terminate program successfully or in failure
 #include "game.h"
 
-using namespace std;
+// This way saves time but gives you access to all elements
+using namespace std; // This using directive gives direct access to the elements of the std namespace
 
+// Instances of Classes
 Hero Hero_1;
 Enemy Troll_1;
 Enemy TrollArmy;
 Battles TrollBattle_1;
 Inventory RPGInventory;
 
+// Vector Dynamic Container with iterator and const interator
 vector<string> inventory;
 vector<string>::iterator invDisplayIter;
 vector<string>::const_iterator invDisplayIterConst;
@@ -143,9 +146,10 @@ void Utility::GameMenu()
 
 }
 
+// Take referenced memory data from Hero HP and Enemy Attack to Calc Remaining Hero HP
 void Hero::SetHealthPoints(int& rHeroHP, int& rEnemyAttk)
 {
-	rHeroHP = Hero_1.m_HealthPoints - rEnemyAttk;
+	rHeroHP -= rEnemyAttk;
 }
 
 int Hero::GetHealthPoints() const
@@ -153,9 +157,10 @@ int Hero::GetHealthPoints() const
 	return Hero_1.m_HealthPoints;
 }
 
-void Hero::SetExperience(int& xp)
+// Take referenced memory data from Hero XP and Enemy XP Worth to Calc latest Hero XP
+void Hero::SetExperience(int& rHeroXP, int& rEnemyXPWorth)
 {
-	xp = Hero_1.m_Experience + Troll_1.m_ExperienceWorth;
+	rHeroXP += rEnemyXPWorth;
 }
 
 int Hero::GetExperience() const
@@ -163,13 +168,15 @@ int Hero::GetExperience() const
 	return Hero_1.m_Experience;
 }
 
+// I use this after defeating a creature to check gathered Hero XP, if it's greater than threshold I lvl up.
 void Hero::SetLevelUp()
 {
 	if (Hero_1.m_Experience >= 100)
 	{
 		Hero_1.m_Level++;
 		Hero_1.m_Experience = 0;
-		Hero_1.m_HealthPoints = Hero_1.m_HealthPoints + 100;
+		Hero_1.m_HealthPoints += 50;
+		Hero_1.m_Attack += 10;
 	}
 }
 
@@ -178,6 +185,7 @@ int Hero::GetLevelUp()
 	return Hero_1.m_Level;
 }
 
+// Just displaying stat info
 void Hero::Stats()
 {
 	cout << "Your are level " << Hero_1.GetLevelUp() << endl;
@@ -186,6 +194,7 @@ void Hero::Stats()
 	cout << "You have " << Hero_1.GetExperience() << " Experience." << endl;
 }
 
+// When hero dies I wipe all Hero Data Members and clear inventory
 void Hero::Death()
 {
 	Hero_1.m_HealthPoints = 0;
@@ -196,6 +205,7 @@ void Hero::Death()
 	cout << "\nYou are Dead, you must be Reborn!" << endl;
 }
 
+// After Death, Hero must be reborn starting at lvl 1 (Hardcore Mode)
 void Hero::Reborn()
 {
 	Hero_1.m_HealthPoints = 1000;
@@ -206,34 +216,37 @@ void Hero::Reborn()
 	cout << "\nYou have been reborn." << endl;
 }
 
-void Enemy::SetHealthPoints(int* EnemyHP_ptr)
+// Take in pointer memory data to calculate remaining Enemy HP.
+void Enemy::SetHealthPoints(int* EnemyHP_ptr, int* HeroAttk_ptr)
 {
-	*EnemyHP_ptr = Troll_1.m_HealthPoints - Hero_1.m_Attack;
+	*EnemyHP_ptr -= *HeroAttk_ptr;
 }
 
-int Enemy::GetHealthPoints() const
+int Enemy::GetHealthPoints(int* EnemyHP_ptr) const
 {
-	return Troll_1.m_HealthPoints;
+	return *EnemyHP_ptr;
 }
 
+// Single Troll Enemy Battle
 void Battles::TrollBattle()
 {
-	int* TrollHP_ptr = &Troll_1.m_HealthPoints;
+	int* TrollHP_ptr = &Troll_1.m_TrollHealthPoints;
+	int* HeroAttk_ptr = &Hero_1.m_Attack;
 	do
 	{
-		Hero_1.SetHealthPoints(Hero_1.m_HealthPoints, Troll_1.m_Attack);
-		Troll_1.SetHealthPoints(TrollHP_ptr);
+		Hero_1.SetHealthPoints(Hero_1.m_HealthPoints, Troll_1.m_TrollAttack);
+		Troll_1.SetHealthPoints(TrollHP_ptr, HeroAttk_ptr);
 
-	} while (Hero_1.m_HealthPoints > 0 && Troll_1.m_HealthPoints > 0);
+	} while (Hero_1.m_HealthPoints > 0 && Troll_1.m_TrollHealthPoints > 0);
 
 	if (Hero_1.m_HealthPoints > 0)
 	{
 		cout << "You Decimate the Troll with your whirlwind attack and chop it's head off." << endl;
 
-		Hero_1.SetExperience(Hero_1.m_Experience);
+		Hero_1.SetExperience(Hero_1.m_Experience, Troll_1.m_TrollExperienceWorth);
 		Hero_1.SetLevelUp();
 
-		Hero_1.m_Silver = Hero_1.m_Silver + Troll_1.m_SilverDrop;
+		Hero_1.m_Silver += Troll_1.m_TrollSilverDrop;
 
 		cout << "You have " << Hero_1.GetHealthPoints() << " Health Points." << endl;
 		cout << "Your XP is " << Hero_1.GetExperience() << endl;
@@ -245,39 +258,39 @@ void Battles::TrollBattle()
 		cout << "You suck at adventure games...You let a weak level 1 troll beat you?" << endl;
 		Hero_1.Death();
 	}
-
 }
 
+// Epic Troll Army Battle of 100 Trolls
 void Battles::EpicTrollArmyBattle()
 {
-	TrollArmy.m_Attack += 100;
-	TrollArmy.m_HealthPoints += 10000;
-	int* TrollHP_ptr = &TrollArmy.m_HealthPoints;
+	int* TrollArmyHP_ptr = &TrollArmy.m_TrollArmyHealthPoints;
+	int* HeroAttk_ptr = &Hero_1.m_Attack;
 
 	do
 	{
-		Hero_1.SetHealthPoints(Hero_1.m_HealthPoints, TrollArmy.m_Attack);
-		TrollArmy.SetHealthPoints(TrollHP_ptr);
+		Hero_1.SetHealthPoints(Hero_1.m_HealthPoints, TrollArmy.m_TrollArmyAttack);
+		TrollArmy.SetHealthPoints(TrollArmyHP_ptr, HeroAttk_ptr);
 
-	} while (Hero_1.m_HealthPoints > 0 && TrollArmy.m_HealthPoints > 0); // If Hero or Enemy reaches 0, then battle loop ends.
+	} while (Hero_1.m_HealthPoints > 0 && TrollArmy.m_TrollArmyHealthPoints > 0); // If Hero or Enemy reaches 0, then battle loop ends.
 
 	if (Hero_1.m_HealthPoints > 0)
 	{
-		cout << "You go into Berserker Mode and hack and slash all 100 Trolls." << endl;
-		Hero_1.SetExperience(Hero_1.m_Experience);
+		cout << "You go into Berserker Mode and defeat all 100 Trolls." << endl;
+		Hero_1.SetExperience(Hero_1.m_Experience, TrollArmy.m_TrollArmyExperienceWorth);
 		Hero_1.SetLevelUp();
 		cout << "You have " << Hero_1.GetHealthPoints() << " Health Points." << endl;
 		cout << "Your XP is " << Hero_1.GetExperience() << endl;
 		cout << "Your level is " << Hero_1.GetLevelUp() << endl;
-
 	}
 	else
 	{
-		cout << "You get tired, become overwhelmed, and get chopped into pieces." << endl;
+		cout << "After a few minutes your stamina is drained, "
+			<< "\nyou become overwhelmed, and get chopped into pieces by the mighty Troll Army." << endl;
 		Hero_1.Death();
 	}
 }
 
+// Grand Bazaar, which includes menu and ability to add items to inventory using vector functions
 void Inventory::MarketMenu()
 {
 	cout << "\nWelcome to the Grand Bazaar!!"
@@ -423,6 +436,7 @@ void Inventory::MarketMenu()
 	}
 }
 
+// Basic Inventory display using FOR LOOP with iterators
 void Inventory::Items()
 {
 	cout << "\nYour items:\n";

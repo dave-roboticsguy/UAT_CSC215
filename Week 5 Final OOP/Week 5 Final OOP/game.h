@@ -1,11 +1,18 @@
+// David Garcia
+// Main Source File
+// Final Assignment OOP
+// v1.0
+
 #pragma once
 class Utility
 {
 public:
+	// Public Class Member Functions or Methods
 	bool Login();
 	void GameMenu();
 
 private:
+	// Private Class Data Members
 	int m_choice;
 	int m_fight;
 };
@@ -13,16 +20,18 @@ private:
 class Hero
 {
 public:
+	// Public Class Data Members
 	int m_HealthPoints = 1000;
 	int m_Experience = 0;
 	int m_Silver = 0;
-	int m_Level = 1 ;
+	int m_Level = 1;
 	int m_Attack = 50;
 
+	// Public Class Member Functions or Methods
 	void SetHealthPoints(int& rHeroHP, int& rEnemyAttk);
 	int GetHealthPoints() const;
 
-	void SetExperience(int& xp);
+	void SetExperience(int& rHeroXP, int& rEnemyXPWorth);
 	int GetExperience() const;
 
 	void SetLevelUp();
@@ -38,29 +47,43 @@ private:
 class Enemy
 {
 public:
-	int m_HealthPoints = 100;
-	int m_SilverDrop = 50;
-	int m_ExperienceWorth = 25;
-	int m_Attack = 10;
+	// Public Class Data Members
+	int m_TrollHealthPoints = 300;
+	int m_TrollSilverDrop = 50;
+	int m_TrollExperienceWorth = 25;
+	int m_TrollAttack = 15;
 
-	void SetHealthPoints(int* EnemyHP_ptr);
-	int GetHealthPoints() const;
+	int m_TrollArmyHealthPoints = 10000;
+	int m_TrollArmySilverDrop = 5000;
+	int m_TrollArmyExperienceWorth = 2500;
+	int m_TrollArmyAttack = 1500;
+
+	// Public Class Member Functions or Methods
+	void SetHealthPoints(int* EnemyHP_ptr, int* HeroAttk_ptr);
+	int GetHealthPoints(int* EnemyHP_ptr) const;
+
 private:
 };
 
 class Battles
 {
 public:
+	// Public Class Member Functions or Methods
 	void TrollBattle();
 	void EpicTrollArmyBattle();
+
+private:
 };
 
 class Inventory
 {
 public:
+	// Public Class Data Members
 	int m_choice;
 
+	// Public Class Member Functions or Methods
 	void MarketMenu();
 	void Items();
+
 private:
 };
