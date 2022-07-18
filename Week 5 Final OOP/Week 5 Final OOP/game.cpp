@@ -346,7 +346,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 2100)
 		{
 			inventory.push_back("Battle Axe");
-			Hero_1.m_Silver = Hero_1.m_Silver - 2100;
+			Hero_1.m_Silver -= 2100;
 
 			cout << "\nYou have purchased a Battle Axe." << endl;
 		}
@@ -361,7 +361,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 2000)
 		{
 			inventory.push_back("Spear");
-			Hero_1.m_Silver = Hero_1.m_Silver - 2000;
+			Hero_1.m_Silver -= 2000;
 
 			cout << "\nYou have purchased a Spear." << endl;
 		}
@@ -376,7 +376,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 1500)
 		{
 			inventory.push_back("Shield");
-			Hero_1.m_Silver = Hero_1.m_Silver - 1500;
+			Hero_1.m_Silver -= 1500;
 
 			cout << "\nYou have purchased a Shield." << endl;
 		}
@@ -391,7 +391,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 800)
 		{
 			inventory.push_back("Helmet");
-			Hero_1.m_Silver = Hero_1.m_Silver - 800;
+			Hero_1.m_Silver -= 800;
 
 			cout << "\nYou have purchased a Helmet." << endl;
 		}
@@ -406,7 +406,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 750)
 		{
 			inventory.push_back("Armor");
-			Hero_1.m_Silver = Hero_1.m_Silver - 750;
+			Hero_1.m_Silver -= 750;
 
 			cout << "\nYou have purchased Armor." << endl;
 		}
@@ -421,7 +421,7 @@ void Inventory::MarketMenu()
 		if (Hero_1.m_Silver >= 500)
 		{
 			inventory.push_back("Boots");
-			Hero_1.m_Silver = Hero_1.m_Silver - 500;
+			Hero_1.m_Silver -= 500;
 
 			cout << "\n You have purchased Boots." << endl;
 		}
@@ -435,8 +435,8 @@ void Inventory::MarketMenu()
 	{
 		if (Hero_1.m_Silver >= 100)
 		{
-			Hero_1.m_HealthPoints = Hero_1.m_HealthPoints + 100;
-			Hero_1.m_Silver = Hero_1.m_Silver - 100;
+			Hero_1.m_HealthPoints += 100;
+			Hero_1.m_Silver -= 100;
 
 			cout << "\n You healed 100 Health Points." << endl;
 		}
